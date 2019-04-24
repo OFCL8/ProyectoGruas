@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ProyectoGruas.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br /><br />
+<h2>Usuarios</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo usuario", "Create2")
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID Usuario</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>ID Role</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Numero Celular</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody id="DataSearching">
+        @foreach (var Item in Model)
+        {
+            <tr>
+                <td>@Item.idUser</td>
+                <td>@Item.UserName</td>
+                <td>@Item.Password</td>
+                <td>@Item.idRole</td>
+                <td>@Item.Nombre</td>
+                <td>@Item.Apellidos</td>
+                <td>@Item.NumeroCelular</td>
+                <td>@Item.Estado</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = Item.idUser }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = Item.idUser })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

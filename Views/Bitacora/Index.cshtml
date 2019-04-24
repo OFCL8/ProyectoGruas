@@ -1,0 +1,125 @@
+﻿@model IEnumerable<ProyectoGruas.Models.Bitacora>
+<br /><br />
+      <div class="container">
+
+          <h3>Bitacoras</h3>
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th>ID Bitacora</th>
+                      <th>ID Usuario</th>
+                      <th>Fecha</th>
+                      <th>Compañia</th>
+                      <th>Marca</th>
+                      <th>Tipo</th>
+                      <th>Año</th>
+                      <th>Placas</th>
+                      <th>Color</th>
+                      <th>Serie</th>
+                      <th>Fecha de Contacto</th>
+                      <th>Testigo</th>
+
+                  </tr>
+              </thead>
+              <tbody id="DataSearching">
+                  @foreach (var Item in Model)
+                  {
+                      <tr>
+                          <td>@Item.Id_Bitacora</td>
+                          <td>@Item.idUser</td>
+                          <td>@Item.Fecha</td>
+                          <td>@Item.Compañia</td>
+                          <td>@Item.Marca</td>
+                          <td>@Item.Tipo</td>
+                          <td>@Item.Año</td>
+                          <td>@Item.Placas</td>
+                          <td>@Item.Color</td>
+                          <td>@Item.Serie</td>
+                          <td>@Item.FechaContacto</td>
+                          <td>@Item.Testigo</td>
+                          <td>
+                              @Html.ActionLink("Editar", "Edit", new { id = Item.Id_Bitacora }) |
+                              @Html.ActionLink("Eliminar", "Delete", new { id = Item.Id_Bitacora })
+                          </td>
+                      </tr>
+                  }
+
+              </tbody>
+          </table>
+
+          <b>Busqueda por: </b>
+          <select id="SearchBy">
+
+              <option value="Todos">Todos</option>
+              <option value="ID Bitacora">ID Bitacora</option>
+              <option value="ID Usuario">ID Usuario</option>
+              <option value="Compañia">Compañia</option>
+              <option value="Marca">Marca</option>
+              <option value="Tipo">Tipo</option>
+              <option value="Año">Año</option>
+              <option value="Placas">Placas</option>
+              <option value="Color">Color</option>
+              <option value="Serie">Serie</option>
+              <option value="Testigo">Testigo</option>
+
+          </select><br /><br />
+          @Html.TextBox("Search")<input type="submit" id="SearchBtn" value="Buscar" /><br /><br />
+
+      </div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#SearchBtn").click(function () {
+            var SearchBy = $("#SearchBy").val();
+            var SearchValue = $("#Search").val();
+            var SetData = $("#DataSearching");
+            SetData.html("");
+            $.ajax({
+                type: "post",
+                url: "/Bitacora/GetSearchingData?SearchBy=" + SearchBy + "&SearchValue=" + SearchValue,
+                contentType: "html",
+                success: function (result) {
+                    if (result.length == 0) {
+                        SetData.append('<tr style="color:red"><td colspan="3">No se encontro el dato</td></tr>')
+                    }
+                    else {
+                        $.each(result, function (index, value) {
+                            var dt = new Date(parseInt(value.Fecha.replace('/Date(', '')))
+                            var dtFinal = AddLeadingZeros(dt.getFullYear(), 4) + '/' +
+                                AddLeadingZeros(dt.getMonth() + 1, 2) + '/' +
+                                AddLeadingZeros(dt.getDate(), 2)
+                            /*var dt2 = new Date(parseInt(value.FechaContacto.replace('/Date(', '')))
+                            var dtFinal2 = AddLeadingZeros(dt2.getFullYear(), 4) + '/' +
+                                AddLeadingZeros(dt2.getMonth() + 1, 2) + '/' +
+                                AddLeadingZeros(dt2.getDate(), 2)*/
+                            var value2 = new Date(parseInt(value.Fecha.substr(6)));
+                            //var value3 = new Date(parseInt(value.FechaContacto.substr(6)));
+                            var Data = "<tr>" +
+                                "<td>" + value.Id_Bitacora + "</td>" +
+                                "<td>" + value.idUser + "</td>" +
+                                "<td>" + value2 + "</td>" +
+                                "<td>" + value.Compañia + "</td>" +
+                                "<td>" + value.Marca + "</td>" +
+                                "<td>" + value.Tipo + "</td>" +
+                                "<td>" + value.Año + "</td>" +
+                                "<td>" + value.Placas + "</td>" +
+                                "<td>" + value.Color + "</td>" +
+                                "<td>" + value.Serie + "</td>" +
+                                //"<td>" + value3 + "</td>" +
+                                "<td>" + value.FechaContacto + "</td>" +//
+                                "<td>" + value.Testigo + "</td>" +
+                                "</tr>";
+                            SetData.append(Data);
+
+                        });
+                    }
+                }
+            });
+            function AddLeadingZeros(number, size) {
+                var s = "0000" + number;
+                return s.substr(s.length - size);
+            }
+        });
+    });
+</script>
