@@ -1,0 +1,183 @@
+﻿@model ProyectoGruas.ViewModels.IndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    var UrlSaveUsers = '@Url.Action("AddUsers", "Users")';
+    var UrlDefault = '@Url.Action("Index", "Users")';
+</script>
+<script src="~/Scripts/Users.js"></script>
+
+<div class="row">
+    <div class="col-lg-2">
+
+        <h3> Users</h3>
+    </div>
+
+
+</div>
+<br />
+<div class="form-group row well">
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        Create Users+
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-lg-2"> <label>User name: </label></div>
+
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" id="tbxUserName" style="width:100%!important">
+
+                        </div>
+                        <div class="col-lg-2"> <label>Password:</label></div>
+
+                        <div class="col-lg-4">
+                            <input type="password" class="form-control" id="tbxPassword" style="width:100%!important">
+
+                        </div>
+
+                    </div>
+                    <br />
+
+
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-2"> <label>Rol: </label> </div>
+                        <div class="col-lg-4">
+                            @Html.DropDownList("idRole", null, htmlAttributes: new { @class = "form-control" })
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-success" onclick="SaveUsers()">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<table class="table table-striped table-responsive col-lg-12" style="background-color:white">
+    <tr>
+        <th>
+            User name
+        </th>
+        <th>
+            PasswordS
+        </th>
+
+        <th>
+            Rol
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Use)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idUser }, new { @class = "btn btn-primary" }) |
+
+                @Html.ActionLink("Delete", "DisableUser", new { id = item.idUser }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+@{Html.RenderPartial("_paginador", Model);}
+
+<style type="text/css">
+    .modalRequest {
+        min-width: 1000px !important;
+    }
+</style>
+<div class="modal fade" id="EditUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <input type="hidden" id="hdfIdUser">
+    <div class="modal-dialog modalRequest" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-lg-2"> <label>User name: </label></div>
+
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="tbxUserName" style="width:100%!important">
+
+                    </div>
+                    <div class="col-lg-2"> <label>Password:</label></div>
+
+                    <div class="col-lg-4">
+                        <input type="password" class="form-control" id="tbxPassword" style="width:100%!important">
+
+                    </div>
+
+                </div>
+                <br />
+
+
+                <br />
+                <div class="row">
+                    <div class="col-lg-2"> <label>Rol: </label> </div>
+                    <div class="col-lg-4">
+                        @Html.DropDownList("idRole", null, htmlAttributes: new { @class = "form-control" })
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="SaveUsers()">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        function ShowPopup(IdUser) {
+            if (IdUser != 0) {
+                $('#myModalLabel').text("Edit User");
+                FillUser(IdUser);
+            }
+            else {
+                document.getElementById("hdfIdUser").value = 0;
+                $('#tbxUserName').val("");
+                //$('#tbxEmail').val("");
+                $('#myModalLabel').text("New User");
+                $('#chkIsActive').prop("checked", true);
+            }
+            $('#EditUserModal').modal('show');
+        }
+    </script>
+
+
+}
