@@ -34,7 +34,7 @@
             <div class="col-md-10">
                 <!----@Html.EditorFor(model => model.Compañia, new { htmlAttributes = new { @class = "form-control" } })-->
                 @Html.DropDownList("Compañia",new List<SelectListItem> { new SelectListItem { Text="Atlas", Value="Atlas"},new SelectListItem { Text="ABA", Value="ABA"},
-               new SelectListItem { Text="Qualitas", Value="Qualitas"},new SelectListItem { Text="General Seguros", Value="General Seguros"}},"Selecione Compañia",new { @class = "btn btn-light dropdown-toggle" })
+               new SelectListItem { Text="Qualitas", Value="Qualitas"},new SelectListItem { Text="General Seguros", Value="General Seguros"}},"Selecione Compañia",new { @class = "btn btn-primary dropdown-toggle" })
                 @Html.ValidationMessageFor(model => model.Compañia, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -121,7 +121,7 @@
 }
 
 <div>
-    @Html.ActionLink("Regresar", "Index","Index",new { @class = "btn btn-info" })
+     @Html.ActionLink("Regresar", "Index","Index",new { @class = "btn btn-info" } )
 </div>
 
 
