@@ -1,0 +1,85 @@
+﻿<style>
+    body, html {
+        height: 70%;
+        background-repeat: no-repeat;        
+    }
+    .navbar-header,.container-fluid {
+        background-color: rgb(72,135,176);
+    }
+    a{
+        color: #000000 !important;
+        font-weight: bold;
+    }
+    a:hover {
+        color: #ffffff !important;
+    }
+
+
+ 
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Gruas Insurgentes</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header"> 
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img class="img-rounded" src="@Url.Content("~/Images/grua.PNG")" height="55" width="60" />
+                @Html.ActionLink("Gruas Insurgentes", "Disponibilidad", "Operador", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    @{
+                        CurrentLogin cLogin = (CurrentLogin)Session["cLogin"];
+                        if (cLogin.idRole == 1)
+                        {
+                            <li>@Html.ActionLink("Operadores", "Disponibilidad", "Operador")</li>
+                            <li>@Html.ActionLink("Bitacoras", "Index", "Bitacora")</li>
+                            <li>@Html.ActionLink("Crear Bitacora", "Create", "Bitacora")</li>
+                            <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+                            if (Session["cLogin"] != null)
+                            {
+                                <li>@Html.ActionLink("Cerrar sesión", "LogOut", "Users")</li>
+                            }
+                        }
+                        if (cLogin.idRole == 2)
+                        {
+                            <li>@Html.ActionLink("Estado", "Index", "Operador")</li>
+                            <li>@Html.ActionLink("Bitacoras", "Index", "Bitacora")</li>
+                            <li>@Html.ActionLink("Crear Bitacora", "Create", "Bitacora")</li>
+                            if (Session["cLogin"] != null)
+                            {
+                                <li>@Html.ActionLink("Cerrar sesión", "LogOut", "Users")</li>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Gruas Insurgentes</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

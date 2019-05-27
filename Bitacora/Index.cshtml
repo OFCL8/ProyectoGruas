@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ProyectoGruas.Models.Bitacora>
+
+@{
+    ViewBag.Title = "Bitacoras";
+}
+
+<style>
+    body {
+        background-color: #e8e9ea;
+    }    
+</style>
+<br/><br/>
+<h2>Bitacoras</h2>
+
+<p>
+    <!--@Html.ActionLink("Crear nueva bitacora", "Create","Create",new { @class = "btn btn-info" })-->
+</p>
+@using (Html.BeginForm("Index", "Bitacora", FormMethod.Get))
+{
+    @Html.TextBox("searching","",new { maxlength = 25, autocomplete="off" })     <button type="submit", value="Search" class="btn btn-info"> <i class="glyphicon glyphicon-search"></i> Buscar </button>
+    
+
+    @Html.DropDownList("opcion",new List<SelectListItem> { new SelectListItem { Text="ID Bitacora", Value="ID Bitacora"},new SelectListItem { Text="ID Usuario", Value="ID Usuario"}, new SelectListItem { Text="Compañia", Value="Compañia"},new SelectListItem { Text="Marca", Value="Marca"},
+        new SelectListItem { Text="Tipo", Value="Tipo"}, new SelectListItem { Text="Año", Value="Año"}, new SelectListItem { Text="Placas", Value="Placas"},new SelectListItem { Text="Color", Value="Color"},new SelectListItem { Text="Serie", Value="Serie"},new SelectListItem { Text="Testigo", Value="Testigo"}},"Selecione Opción",
+        new { @class = "btn btn-primary dropdown-toggle" })
+
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID Bitacora</th>
+            <th>ID Usuario</th>
+            <th>Fecha</th>
+            <th>Compañia</th>
+            <th>Marca</th>
+            <th>Tipo</th>
+            <th>Año</th>
+            <th>Placas</th>
+            <th>Color</th>
+            <th>Serie</th>
+            <th>Fecha de Contacto</th>
+            <th>Testigo</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3" style="color:red">
+                    No Match
+                </td>
+            </tr>
+        }
+        @foreach (var Item in Model)
+        {
+            <tr>
+                <td>@Item.Id_Bitacora</td>
+                <td>@Item.idUser</td>
+                <td>@Item.Fecha</td>
+                <td>@Item.Compañia</td>
+                <td>@Item.Marca</td>
+                <td>@Item.Tipo</td>
+                <td>@Item.Año</td>
+                <td>@Item.Placas</td>
+                <td>@Item.Color</td>
+                <td>@Item.Serie</td>
+                <td>@Item.FechaContacto</td>
+                <td>@Item.Testigo</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = Item.Id_Bitacora },new { @class="btn btn-success" }) 
+                    @Html.ActionLink("Eliminar", "Delete", new { id = Item.Id_Bitacora },new { @class="btn btn-danger" }) 
+            </tr>
+        }
+
+    </tbody>
+</table>
