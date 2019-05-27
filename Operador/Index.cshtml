@@ -4,7 +4,11 @@
 <h3>Operador: @ViewBag.Nombre</h3>
 <br /><br />
 
-
+<style>
+    body {
+        background-color: #e8e9ea;
+    }    
+</style>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -28,7 +32,7 @@
             <div class="col-md-10">
                 <!---@Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control" } })-->
                 @Html.DropDownList("Estado",new List<SelectListItem> { new SelectListItem { Text="Disponible", Value="Disponible"},new SelectListItem { Text="En Servicio", Value="En Servicio"},
-                  new SelectListItem { Text="Comida", Value="Comida"}},"Selecione estado",new { @class = "btn btn-light dropdown-toggle" })
+                  new SelectListItem { Text="Comida", Value="Comida"}},"Selecione estado",new { @class = "btn btn-primary dropdown-toggle" })
                 @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -38,7 +38,7 @@ namespace ProyectoGruas.Models
         [Required(ErrorMessage = "Favor de ingresar un numero celular")]
         [Display(Name = "NumeroCelular")]
         [RegularExpression("^[0-9]{1,10}$", ErrorMessage = "Favor de ingresar solamente numeros o no mayor a 10 numeros")]
-        public int NumeroCelular { get; set; }
+        public long NumeroCelular { get; set; }
 
         [Required(ErrorMessage = "Favor de seleccionar un estado")]
         [Display(Name = "Estado")]

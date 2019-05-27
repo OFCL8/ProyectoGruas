@@ -49,9 +49,7 @@ namespace ProyectoGruas.Controllers
                 }
 
             }
-            //ViewBag.idRole = new SelectList(db.Roles, "idRole", "Description");
             return View();
-            //return RedirectToAction("Index2");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -64,15 +62,11 @@ namespace ProyectoGruas.Controllers
                 {
                     db.Users.Add(usuario);
                     db.SaveChanges();
-                    //return RedirectToAction("Index");
                 }
-                //ViewBag.idRole = new SelectList(db.Roles, "idRole", "Description", user.idRole);
-                //return View(usuario);
                 return RedirectToAction("Index");
             }
             catch
             {
-                //return RedirectToAction("ErrorUserName");
                 TempData["msg"] = "<script>alert('El username ingresado ya existe actualmente');</script>";
                 return RedirectToAction("Create2");
             }
@@ -123,7 +117,6 @@ namespace ProyectoGruas.Controllers
             }
             catch
             {
-                //return RedirectToAction("ErrorUserName");
                 TempData["msg"] = "<script>alert('El username ingresado ya existe actualmente');</script>";
                 return RedirectToAction("Index");
             }

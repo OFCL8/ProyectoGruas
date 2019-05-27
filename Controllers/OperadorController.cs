@@ -31,7 +31,6 @@ namespace ProyectoGruas.Controllers
 
 
             CurrentLogin cLogin2 = (CurrentLogin)Session["cLogin"];
-            //cLogin.idUser = bitacora.idUser;
 
             User usuarioss = db.Users.Find(cLogin2.idUser);
             ViewBag.Nombre = usuarioss.Nombre + " " + usuarioss.Apellidos;
@@ -79,9 +78,7 @@ namespace ProyectoGruas.Controllers
                 }
 
             }
-            //Bitacora bitac = db.Bitacoras.Find(id);
             CurrentLogin cLogin2 = (CurrentLogin)Session["cLogin"];
-            //cLogin.idUser = bitacora.idUser;
 
             User usuarioss = db.Users.Find(cLogin2.idUser);
             if (usuarioss == null)

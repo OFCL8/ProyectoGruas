@@ -13,8 +13,8 @@ namespace ProyectoGruas.Controllers
     {
         private GruasContext db = new GruasContext();
 
-        // GET: Bitacora
-        public ActionResult Index(Bitacora bitacora, [Bind(Include = "Estado")] User usuario)
+        
+        public ActionResult Index(Bitacora bitacora, [Bind(Include = "Estado")] User usuario, string searching,string opcion)
         {
             if (Session["cLogin"] == null)
             {
@@ -41,25 +41,367 @@ namespace ProyectoGruas.Controllers
                 db.Entry(usuarioss).State = EntityState.Modified;
                 usuarioss.Estado = "Disponible";
                 db.SaveChanges();
-                //return RedirectToAction("Index");
             }
             
-            //Despliga todo los datos de la bitacora al admin
+            // Despliga todo los datos de la bitacora al admin
             if (cLogin2.idRole == 1)
             {
-                return View(db.Bitacoras.ToList());
+                if (opcion == "ID Bitacora")
+                {
+                    try
+                    {
+                        int Id = Convert.ToInt32(searching);
+                        return View(db.Bitacoras.Where(x => x.Id_Bitacora == Id || searching == null).ToList());
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else if (opcion == "ID Usuario")
+                {
+                    try
+                    {
+                        int Id = Convert.ToInt32(searching);
+                        return View(db.Bitacoras.Where(x => x.idUser == Id || searching == null).ToList());
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else if (opcion == "Compañia")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Compañia==searching).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else if (opcion == "Marca")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Marca== searching ).ToList());
+                        }
+                        
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else if (opcion == "Tipo")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Tipo== searching ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else if (opcion == "Año")
+                {
+                    try
+                    {
+                        int Id = Convert.ToInt32(searching);
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Año== Id ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else if (opcion == "Placas")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Placas== searching ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else if (opcion == "Color")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Color== searching ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else if (opcion == "Serie")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Serie== searching ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else if (opcion == "Testigo")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Testigo== searching ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.ToList());
+                    }
+                }
+                else
+                {
+                    return View(db.Bitacoras.ToList());
+                }
             }
+            // Despliega los datos de los operadores
             else
             {
-                //Despliega todos los datos del usuario correspondiente
-                List<Bitacora> StuList = new List<Bitacora>();
-                StuList = db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList();
-                return View(StuList);
+                if (opcion == "ID Bitacora")
+                {
+                    try
+                    {
+                        int Id = Convert.ToInt32(searching);
+                        return View(db.Bitacoras.Where(x => x.Id_Bitacora == Id && x.idUser==cLogin2.idUser || searching == null).ToList());
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else if (opcion == "ID Usuario")
+                {
+                    try
+                    {
+                        int Id = Convert.ToInt32(searching);
+                        return View(db.Bitacoras.Where(x => x.idUser == Id && x.idUser==cLogin2.idUser || searching == null).ToList());
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else if (opcion == "Compañia")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Compañia==searching && x.idUser==cLogin2.idUser ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else if (opcion == "Marca")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Marca== searching && x.idUser==cLogin2.idUser ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else if (opcion == "Tipo")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Tipo== searching && x.idUser==cLogin2.idUser ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else if (opcion == "Año")
+                {
+                    try
+                    {
+                        int Id = Convert.ToInt32(searching);
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Año== Id && x.idUser==cLogin2.idUser ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else if (opcion == "Placas")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Placas== searching && x.idUser==cLogin2.idUser ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else if (opcion == "Color")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Color== searching && x.idUser==cLogin2.idUser ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else if (opcion == "Serie")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Serie== searching && x.idUser==cLogin2.idUser ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else if (opcion == "Testigo")
+                {
+                    try
+                    {
+                        if (String.IsNullOrEmpty((searching)))
+                        {
+                            return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                        }
+                        else
+                        {
+                            return View(db.Bitacoras.Where(x => x.Testigo== searching && x.idUser==cLogin2.idUser ).ToList());
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                    }
+                }
+                else
+                {
+                    return View(db.Bitacoras.Where(x => x.idUser == cLogin2.idUser).ToList());
+                }
             }
-
-            //return View();
-
+            
         }
+
+
         public ActionResult Create([Bind(Include = "Estado")] User usuario)
         {
             if (Session["cLogin"] == null)
@@ -88,7 +430,6 @@ namespace ProyectoGruas.Controllers
                 db.Entry(usuarioss).State = EntityState.Modified;
                 usuarioss.Estado = "En Servicio";
                 db.SaveChanges();
-                //return RedirectToAction("Index");
             }
             return View();
         }
@@ -100,29 +441,10 @@ namespace ProyectoGruas.Controllers
             if (ModelState.IsValid)
             {
                 CurrentLogin cLogin = (CurrentLogin)Session["cLogin"];
-                //cLogin.idUser = bitacora.idUser;
                 bitacora.Fecha = DateTime.Now;
                 bitacora.idUser = cLogin.idUser;
-
-                /*db.Entry(usuario).State = EntityState.Modified;
-                usuario.isActive = false;*/
-                
                 db.Bitacoras.Add(bitacora);
                 db.SaveChanges();
-                /*
-                User usuarioss = db.Users.Find(cLogin.idUser);
-                if (usuarioss == null)
-                {
-                    return HttpNotFound();
-                }
-                else
-                {
-                    db.Entry(usuarioss).State = EntityState.Modified;
-                    usuarioss.isActive = false;
-                    db.SaveChanges();
-                    //return RedirectToAction("Index");
-                }*/
-
                 return RedirectToAction("Index");
             }
 
@@ -301,8 +623,6 @@ namespace ProyectoGruas.Controllers
             return RedirectToAction("Index");
         }
 
-
-        //PDF
 
     }
 }

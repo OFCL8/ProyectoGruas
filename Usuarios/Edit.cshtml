@@ -9,6 +9,9 @@
         -webkit-appearance: none;
         margin: 0;
     }
+    body {
+         background-color: #e8e9ea;
+     } 
 </style>
 
 <br /><br />
@@ -43,7 +46,7 @@
             @Html.LabelFor(model => model.idRole, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <!----@Html.EditorFor(model => model.idRole, new { htmlAttributes = new { @class = "form-control" } })-->
-                @Html.DropDownList("idRole", new List<SelectListItem> { new SelectListItem { Text = "1", Value = "1" }, new SelectListItem { Text = "2", Value = "2" } }, "Selecione Role",new { @class = "btn btn-light dropdown-toggle" })
+                @Html.DropDownList("idRole", new List<SelectListItem> { new SelectListItem { Text = "1", Value = "1" }, new SelectListItem { Text = "2", Value = "2" } }, "Selecione Role",new { @class = "btn btn-primary dropdown-toggle" })
                 @Html.ValidationMessageFor(model => model.idRole, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -77,7 +80,7 @@
             <div class="col-md-10">
                 <!---@Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control" } })-->
                 @Html.DropDownList("Estado",new List<SelectListItem> { new SelectListItem { Text="Disponible", Value="Disponible"},new SelectListItem { Text="En Servicio", Value="En Servicio"},
-              new SelectListItem { Text="Comida", Value="Comida"}},"Selecione estado",new { @class = "btn btn-light dropdown-toggle" })
+              new SelectListItem { Text="Comida", Value="Comida"}},"Selecione estado",new { @class = "btn btn-primary dropdown-toggle" })
                 @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
             </div>
         </div>

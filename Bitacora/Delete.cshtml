@@ -1,0 +1,117 @@
+﻿@model ProyectoGruas.Models.Bitacora
+
+@{
+    ViewBag.Title = "Delete";
+}
+<style>
+    body {
+        background-color: #e8e9ea;
+    } 
+</style>
+<br /><br />
+<h2>Eliminar</h2>
+
+<h3>Se eliminaran los siguientes datos: </h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Bitacora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Bitacora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Compañia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Compañia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Año)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Año)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Placas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Placas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Serie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Serie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Testigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Testigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaContacto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaContacto)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar", "Index","Index",new { @class = "btn btn-info" })
+        </div>
+    }
+</div>

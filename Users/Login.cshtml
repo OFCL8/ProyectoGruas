@@ -11,7 +11,7 @@
     body, html {
         height: 100%;
         background-repeat: no-repeat;
-        background-image: linear-gradient(rgb(244, 241, 233), rgb(88, 82, 80));
+        background-image: linear-gradient(rgb(72, 135, 176), rgb(179, 197, 217));
     }
 
     .card-container.card {
@@ -32,7 +32,7 @@
     * Card component
     */
     .card {
-        background-color: #FFFFFF;
+        background-color: rgb(255, 255, 255);
         /* just in case there no content*/
         padding: 20px 25px 30px;
         margin: 0 auto 25px;
@@ -112,7 +112,7 @@
 
     .btn.btn-signin {
         /*background-color: #4d90fe; */
-        background-color: rgb(104, 145, 162);
+        background-color: rgb(72, 135, 176);
         /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
         padding: 0px;
         font-weight: 700;
@@ -131,7 +131,7 @@
         .btn.btn-signin:hover,
         .btn.btn-signin:active,
         .btn.btn-signin:focus {
-            background-color: rgb(255, 170, 0);
+            background-color: rgb(76, 175, 80);
         }
 
     .forgot-password {
@@ -144,6 +144,10 @@
             color: rgb(255, 170, 0);
         }
 </style>
+
+
+<META http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 
 @using (Html.BeginForm("SearchUser", "Users", FormMethod.Post))
 {
@@ -165,13 +169,13 @@
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="text" name="username" class="form-control" placeholder="Usuario" required autofocus>
                 <br />
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
                 <div id="remember" class="checkbox">
                     <label>
                         <!--  <input type="checkbox" value="remember-me"> Remember me-->
                     </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Iniciar sesion</button>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Iniciar sesión</button>
             </form><!-- /form -->
 
         </div><!-- /card-container -->

@@ -51,7 +51,6 @@ namespace ProyectoGruas.Controllers
             {
                 TempData["msg"] = "<script>alert('Nombre de usuario y/o contraseña incorrectos');</script>";
                 return RedirectToAction("Login", "Users");
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
         }
