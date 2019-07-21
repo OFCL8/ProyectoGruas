@@ -15,11 +15,12 @@
 </p>
 @using (Html.BeginForm("Index", "Bitacora", FormMethod.Get))
 {
-    @Html.TextBox("searching","",new { maxlength = 25, autocomplete="off" })  <input type="submit" value="Search",new { class = "btn btn-info" }/>
+    @Html.TextBox("searching","",new { maxlength = 25, autocomplete="off" })  <button type="button" class="btn btn-info">
+    <span class="glyphicon glyphicon-search"></span> Buscar </button>
 
     @Html.DropDownList("opcion",new List<SelectListItem> { new SelectListItem { Text="ID Bitacora", Value="ID Bitacora"},new SelectListItem { Text="ID Usuario", Value="ID Usuario"}, new SelectListItem { Text="Compañia", Value="Compañia"},new SelectListItem { Text="Marca", Value="Marca"},
         new SelectListItem { Text="Tipo", Value="Tipo"}, new SelectListItem { Text="Año", Value="Año"}, new SelectListItem { Text="Placas", Value="Placas"},new SelectListItem { Text="Color", Value="Color"},new SelectListItem { Text="Serie", Value="Serie"},new SelectListItem { Text="Testigo", Value="Testigo"}},"Selecione Compañia",
-        new { @class = "btn btn-light dropdown-toggle" })
+        new { @class = "btn btn-primary dropdown-toggle" })
 
 }
 

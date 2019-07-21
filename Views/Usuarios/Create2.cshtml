@@ -1,7 +1,7 @@
 ﻿@model ProyectoGruas.Models.User
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Crear";
 }
 <style>
     input[type=number]::-webkit-inner-spin-button,
@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.idRole, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("idRole", new List<SelectListItem> { new SelectListItem { Text = "1", Value = "1" }, new SelectListItem { Text = "2", Value = "2" } }, "Selecione Role")
+                @Html.DropDownList("idRole", new List<SelectListItem> { new SelectListItem { Text = "1", Value = "1" }, new SelectListItem { Text = "2", Value = "2" } }, "Selecione Role",new { @class = "btn btn-light dropdown-toggle" })
                 @Html.ValidationMessageFor(model => model.idRole, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,21 +75,21 @@
             @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("Estado",new List<SelectListItem> { new SelectListItem { Text="Disponible", Value="Disponible"},new SelectListItem { Text="En Servicio", Value="En Servicio"},
-              new SelectListItem { Text="Comida", Value="Comida"}},"Selecione estado")
+              new SelectListItem { Text="Comida", Value="Comida"}},"Selecione estado",new { @class = "btn btn-light dropdown-toggle" })
                 @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-default" />
+                <input type="submit" value="Crear" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Regresar", "Index")
+    @Html.ActionLink("Regresar", "Index","Index",new { @class = "btn btn-info" })
 </div>
 
 @section Scripts {

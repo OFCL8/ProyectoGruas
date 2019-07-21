@@ -20,14 +20,14 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
+        <div class="container-fluid">
+            <div class="navbar-header"> 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img src="@Url.Content("~/Images/grua.PNG")" height="55 width="40" />
+                <img class="img-rounded" src="@Url.Content("~/Images/grua.PNG")" height="55" width="40" />
                 @Html.ActionLink("Gruas Insurgentes", "Disponibilidad", "Operador", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">

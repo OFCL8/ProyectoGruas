@@ -7,10 +7,10 @@
 <h2>Usuarios</h2>
 
 <p>
-    @Html.ActionLink("Crear nuevo usuario", "Create2")
+    @Html.ActionLink("Crear nuevo usuario", "Create2","Create",new { @class = "btn btn-info" })
 </p>
 
-<table class="table table-bordered">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>ID Usuario</th>
@@ -36,8 +36,8 @@
                 <td>@Item.NumeroCelular</td>
                 <td>@Item.Estado</td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = Item.idUser }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = Item.idUser })
+                    @Html.ActionLink("Editar", "Edit", new { id = Item.idUser },new { @class= "btn btn-primary" }) 
+                    @Html.ActionLink("Eliminar", "Delete", new { id = Item.idUser },new { @class="btn btn-danger" }) 
                 </td>
             </tr>
         }
